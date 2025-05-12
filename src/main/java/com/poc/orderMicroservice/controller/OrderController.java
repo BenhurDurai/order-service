@@ -1,7 +1,6 @@
 package com.poc.orderMicroservice.controller;
 
-import com.poc.common.dto.CartCheckoutRequest;
-//import com.poc.orderMicroservice.dto.OrderRequest;
+import com.poc.dto.CartCheckoutRequest;
 import com.poc.orderMicroservice.model.Order;
 import com.poc.orderMicroservice.service.OrderService;
 import lombok.extern.slf4j.Slf4j;

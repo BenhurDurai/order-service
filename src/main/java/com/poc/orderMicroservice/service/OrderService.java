@@ -1,8 +1,7 @@
 package com.poc.orderMicroservice.service;
 
 
-import com.poc.common.dto.CartCheckoutRequest;
-//import com.poc.orderMicroservice.dto.OrderRequest;
+import com.poc.dto.CartCheckoutRequest;
 import com.poc.orderMicroservice.model.Order;
 
 public interface OrderService {

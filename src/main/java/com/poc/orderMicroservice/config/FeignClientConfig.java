@@ -1,5 +1,6 @@
 package com.poc.orderMicroservice.config;
 
+/*
 import feign.RequestInterceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
@@ -12,23 +13,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Configuration
 public class FeignClientConfig {
 
-//    @Bean
-//    public RequestInterceptor requestInterceptor() {
-//        return requestTemplate -> {
-//            // Replace with your logic to fetch/generate the token
-//            String token = "Bearer your_static_or_dynamic_token_here";
-//            requestTemplate.header("Authorization", token);
-//
-//            HttpHeaders httpHeaders = new HttpHeaders();
-//            httpHeaders.setBearerAuth(getCurrentRequestToken());
-//            HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-//        };
-//    }
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
-//            String token = getCurrentRequestToken();
-            String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6IlVzZXJNaWNyb3NlcnZpY2UiLCJpYXQiOjE3NDUzODA2ODEsImV4cCI6MTc0NTQxNjY4MX0.0wWgrnud5gJ3O9ixuSCKw8uRoAVbodQivrfAkrPfiBA";
+            String token = getCurrentRequestToken();
             requestTemplate.header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
         };
     }
@@ -43,5 +31,28 @@ public class FeignClientConfig {
             }
         }
         throw new RuntimeException("Authorization token is missing or invalid");
+    }
+}
+*/
+
+
+import feign.RequestInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+
+@Configuration
+public class FeignClientConfig {
+
+    public static final ThreadLocal<String> AUTH_TOKEN = new ThreadLocal<>();
+
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return requestTemplate -> {
+            String token = AUTH_TOKEN.get();
+            if (token != null && !token.isBlank()) {
+                requestTemplate.header(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+            }
+        };
     }
 }

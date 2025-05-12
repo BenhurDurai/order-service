@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ProductServiceClient {
 
     @PutMapping("/api/products/updateQuantity/{productName}/{quantity}")
+
     void updateProductQuantity(@PathVariable("productName") String productName,
                                @PathVariable("quantity") int quantity);
 }
